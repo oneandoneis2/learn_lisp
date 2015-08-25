@@ -42,3 +42,18 @@
 ;> "Default"
 ; There's no fall-through - you get the first match and then you're done.
 ; Which IMHO is a far more sensible approach
+
+; There are also the "stealth" conditionals, which are helpful if you need short-circuiting
+; "and" and "or"!
+(and (print "one") (print "two"))
+;> "one"
+;> "two"
+(and (print "one") () (print "two"))
+;> "one"
+(or (print "one") (print "two"))
+;> "one"
+(or () (print "two"))
+;> "two"
+; To prove short-circuiting, note that this doesn't blow up:
+(or (print "1") (/ 0 0))
+;> "1"
