@@ -43,3 +43,13 @@ bar
 ;> 4
 (fifth foo)
 ;> 5
+
+; Some things return a bit more than you might expect:
+(member 3 '(1 2 3 4 5 6))
+;> (3 4 5 6)
+; ^ Returns not just a bool, not just the match, but the rest of the list!
+; Because it's just a cons, this is just as "cheap" as any other truth value
+; and has more potential to be useful
+; e.g. In a list that contains all numbers up to a given value, how many are >5?
+(length (member 6 (sort '(13 3 8 12 7 5 11 9 1 4 10 2 6) #'<)))
+;> 8
