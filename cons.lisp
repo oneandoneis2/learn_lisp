@@ -43,3 +43,10 @@ il
 (fourth il)
 ;> 2
 ; See? Infinite looping list!
+
+; The front half of a cons cell is the car, the other half is the cdr
+; This is why the cdr of a list is its tail
+; The etymology is:
+; "Contents of the Address part of Register number"
+; "Contents of the Decrement part of Register number"
+; Intuitive, huh?

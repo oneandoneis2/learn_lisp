@@ -59,3 +59,17 @@
 ; Anonymous functions declared via lambda
 (map 'list (lambda (x) (+ 3 x)) (list 0 3 6))
 ;> (3 6 9)
+
+; Local functions defined by flet or labels
+; Basically the same as let and let* - the latter allows referencing
+(flet ((my-triple (x) (* x 3)))
+  (princ (my-triple 4)))
+;> 12
+(labels ((my-double (x) (* x 2))
+         (my-quadruple (x) (my-double (my-double x))))
+  (princ (my-quadruple 3)))
+;> 12
+
+; labels is the only way to do recursive local functions
+(labels ((my-sum (x) (if x (+ (car x) (my-sum (cdr x))) 0)))
+  (princ (my-sum '(1 2 3 4))))
