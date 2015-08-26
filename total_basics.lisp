@@ -8,7 +8,7 @@
 
 ; Command mode is the default.
 
-; Right. Let's get started. A Lisp list:
+; Right. Let's get started. A Lisp form:
 (list 1 2 3)
 ;> (1 2 3)
 
