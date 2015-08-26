@@ -31,3 +31,7 @@
 ; Because lists are how both data and functions are written, they are pretty much interchangable
 (eval '(+ 2 3))
 ;> 5
+
+; Also, there's quasi-quoting for interpolation:
+`(the first item in (1 2 3) is ,(car (list 1 2 3)) ok?)
+;> (THE FIRST ITEM IN (1 2 3) IS 1 OK?)
