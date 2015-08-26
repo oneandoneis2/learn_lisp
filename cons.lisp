@@ -15,6 +15,9 @@
 ; A list is just a chain of things cons'd together with a nil at the end
 (cons 1 (cons 2 nil))
 ;> (1 2)
+; So adding things to the head of a list is a simple cons operation
+(cons 1 '(2 3 4 5))
+;> (1 2 3 4 5)
 
 ; From this we can get infinite lists just by pointing the last element at the first!
 (defvar il (list 1 2))
