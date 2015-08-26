@@ -48,6 +48,7 @@
 ; There's no fall-through - you get the first match and then you're done.
 ; Which IMHO is a far more sensible approach
 ; Use case when always looking at the same var, cond for everything else
+; Note: Case uses EQ for equality testing - won't work on strings etc :(
 
 ; There are also the "stealth" conditionals, which are helpful if you need short-circuiting
 ; "and" and "or"!
