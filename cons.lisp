@@ -53,3 +53,10 @@ il
 ; "Contents of the Address part of Register number"
 ; "Contents of the Decrement part of Register number"
 ; Intuitive, huh?
+
+; There are also convenience functions to make it simpler to cons things
+(defparameter foo '(1 2 3))
+(push 0 foo)
+;> (0 1 2 3)
+; Basically, the equivalent of:
+(setf foo (cons 0 foo))
