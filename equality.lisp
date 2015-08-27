@@ -23,5 +23,5 @@
 (eql #\a #\a)
 (equal "abc" "abc")
 (equal '(1 2 3) '(1 2 3))
-(equalp "abc" "abc")
+(equalp "abc" "aBc")
 (equalp 1 1.0)
