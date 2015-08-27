@@ -2,8 +2,8 @@
   (if lst
     (let* ((head (car lst))
            (tail (cdr lst))
-           (left (remove-if (lambda (x) (not (funcall fun x head))) tail))
-           (right (remove-if (lambda (x) (funcall fun x head)) tail)))
+           (left (remove-if (lambda (x) (funcall fun head x)) tail))
+           (right (remove-if (lambda (x) (not (funcall fun head x))) tail)))
       (append (mysort left fun) (list head) (mysort right fun)))
   nil))
 
