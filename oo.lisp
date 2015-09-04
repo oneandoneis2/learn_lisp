@@ -68,6 +68,18 @@
   (format t "Play?"))
 (defmethod intro ((a1 dog) (a2 cat))
   (format t "onetwothreeDEATH!!!"))
+
+; Now let's add a class of dog on vacation in France!
+(defclass chien (dog)
+  ((speak :initform "Woah!")))
+(defmethod intro ((a1 chien) (a2 animal))
+  (format t "Rabies!")
+  (call-next-method))
+(defmethod intro ((a1 animal) (a2 chien))
+  (format t "Rabies!")
+  (call-next-method))
+
+; And test it out!
 (introduce darling darling2)
 ;> Dogpile!
 (introduce darling squeak)
@@ -78,3 +90,29 @@
 ;> Catfight!
 (introduce squeak squeak)
 ;> Mirror?
+
+(defparameter Harry (make-instance 'chien :name "'Arrie"))
+(introduce Harry Darling)
+;> Rabies!Dogpile!
+(introduce Darling Harry)
+;> Dogpile!
+; You might expect rabies in both cases, but no! That would be the second definition
+; of the intro method that handles a "chien", with it as the second parameter.
+; But because the first param of that method is any animal, it is less-specific overall
+
+; All these methods have been primaries
+; There are also auxiliary methods: before; after; and around
+(defgeneric bark (a1)
+            (:documentation "Make a dog make some noise!"))
+(defmethod bark ((a1 dog))
+  (format t "~a says ~a" (name a1) (speak a1)))
+(defmethod bark :around ((a1 chien))
+  (format t "Le chien ")
+  (call-next-method)
+  (format t " And then has lunch."))
+(bark darling)
+;> Max says Woof!
+(bark Harry)
+;> Le chien 'Arrie says Woah! And then has lunch.
+; Having the "rabies" be inserted by a "before" for any chiens would probably
+; be the nicer way to do it, rather than munging two primaries.
