@@ -38,3 +38,10 @@
 ; consume/reduce/fold lists - take a list and just return a single value
 (reduce #'+ '(1 2 3 4))
 ;> 10
+
+; Simple addition and subtraction of values
+(defparameter foo '(1 2 3))
+(push 0 foo)
+;> (0 1 2 3)
+(pop foo)
+;> 0
