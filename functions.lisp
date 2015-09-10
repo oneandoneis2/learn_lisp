@@ -35,6 +35,11 @@
 (bar2 :a 1 :c 2)
 ;> 2 woo! 1
 
+; and can also take a predicate for whether a value is default or supplied
+(defun bar3 (&key (a 10 a-p) (b 10 b-p)) (list a a-p b b-p))
+(bar3 :a 10)
+;> (10 T 10 NIL)
+
 ; Use #' to get a function reference - sugar for (function)
 (defun my-double (x) (* x 2))
 
