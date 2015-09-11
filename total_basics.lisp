@@ -35,3 +35,9 @@
 ; Also, there's quasi-quoting for interpolation:
 `(the first item in (1 2 3) is ,(car (list 1 2 3)) ok?)
 ;> (THE FIRST ITEM IN (1 2 3) IS 1 OK?)
+
+; S-expressions
+; Made up of lists and atoms.
+; Lists are zero or more elements, separated by whitespace, delimited by parentheses
+; Atoms are everything else - numbers, strings, symbols... nil is both atom and list.
+; A list can be just a list - data only - or a form - first element is a function
