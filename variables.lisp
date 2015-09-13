@@ -24,6 +24,12 @@
 (princ *something-global-5*)
 ;> nil
 
+; Can also just use a 'raw' setf to declare a variable
+(setf foo (+ 2 3))
+;> 5
+(* 2 foo)
+;> 10
+
 ; And then there's lexical scoping
 (let ((x 5) (y 6))
   (format nil "~a ~a" x y))
