@@ -40,4 +40,12 @@
 ; Made up of lists and atoms.
 ; Lists are zero or more elements, separated by whitespace, delimited by parentheses
 ; Atoms are everything else - numbers, strings, symbols... nil is both atom and list.
-; A list can be just a list - data only - or a form - first element is a function
+; A list can be just a list - data only - or a form
+; A form takes the first element as a name to evaluate - must be an atom
+; Three types of form: function call; macro; special
+(list 1 2 3)
+; 'list' is function name, '1 2 3' are arguments passed to the function
+(push 1 mylist)
+; 'push' is macro name, expands to (SETQ MYLIST (CONS 1 MYLIST))
+(if nil (/ 1 0) 10)
+; 'if' is special form, allows arguments not to be evaluated until needed
