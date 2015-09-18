@@ -2,13 +2,11 @@
 (defun hello-world () (format t "hello world"))
 (hello-world)
 ;> hello world
-; NIL
 
 ; Can take arguments
 (defun hello-you (name) (format t "Hello, ~a!" name))
 (hello-you "Fred")
 ;> Hello, Fred!
-;> NIL
 
 ; Can have optional params
 (defun my-list (a b &optional c d) (list a b c d))

@@ -42,10 +42,11 @@
 ;The inner x over-rides the outer, as you'd hope
 
 (let ((x 5) (y 6))
-  (format nil "~a ~a" x y)
+  (format t "~a ~a~%" x y)
   (setf x 6)
-  (format nil "~a ~a" x y))
-;> "6 6"
+  (format t "~a ~a~%" x y))
+;> 5 6
+;> 6 6
 ; Set the value of a var using setf
 
 (defparameter *close*
@@ -67,4 +68,5 @@
 ; let can also be used to over-ride globals temporarily
 (let ((*standard-output* *some-other-stream*))
     (do-stuff))
-; Everything done by do-stuff will output to some other stream; stdout will then revert to normal outside the scope of the let
+; Everything done by do-stuff will output to some other stream;
+; stdout will then revert to normal outside the scope of the let
