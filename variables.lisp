@@ -30,6 +30,15 @@
 ;> 5
 (* 2 foo)
 ;> 10
+; There's also handy shortcuts for things like foo++
+(format t "~a ~a ~a" foo (incf foo) foo (decf foo))
+;> 5 6 6 5
+; You can swap two values with rotatef
+(let ((a 1)(b 2)) (rotatef a b)(format t "~a ~a" a b))
+;> 2 1
+; And shuffle values along in a chain with shiftf
+(let ((a 1)(b 2)) (shiftf a b 3)(format t "~a ~a" a b))
+;> 2 3
 
 ; And then there's lexical scoping
 (let ((x 5) (y 6))
