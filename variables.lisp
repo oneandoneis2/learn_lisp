@@ -25,6 +25,7 @@
 ;> nil
 
 ; Can also just use a 'raw' setf to declare a variable
+; set and setq are obsolete, do not use
 (setf foo (+ 2 3))
 ;> 5
 (* 2 foo)
