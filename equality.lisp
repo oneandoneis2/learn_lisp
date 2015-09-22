@@ -6,6 +6,7 @@
 ; EQUAL: Also allows same-value lists and strings
 ; EQUALP: Even allows strings with different case and floats compared to ints!
 ; LoL suggests using EQ for symbols and EQUAL for everything else. Seems sane to me!
+; There's also = for numbers only
 
 ; These are all false
 (eq "abc" "abc")
@@ -14,6 +15,7 @@
 (eql "a" "a")
 (eql '(1 2 3) '(1 2 3))
 (equal 1 1.0)
+(= 1 2)
 
 ; These are all true
 (eq () nil)
@@ -25,3 +27,7 @@
 (equal '(1 2 3) '(1 2 3))
 (equalp "abc" "aBc")
 (equalp 1 1.0)
+(= 1 1)
+(= 1 1)
+(= 1 1.0)
+(= 1/2 0.5)
