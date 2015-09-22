@@ -75,3 +75,9 @@
 ;> Name?
 ;< Dominic
 ;> Hello, Dominic
+
+; You can output differently based on truthiness
+(format t "The argument is ~:[false~;true~]." t)
+;> The argument is true.
+(format t "The argument is ~:[false~;true~]." nil)
+;> The argument is false.
