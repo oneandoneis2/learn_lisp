@@ -6,7 +6,7 @@
 ; EQUAL: Also allows same-value lists and strings
 ; EQUALP: Even allows strings with different case and floats compared to ints!
 ; LoL suggests using EQ for symbols and EQUAL for everything else. Seems sane to me!
-; There's also = for numbers only
+; There's also = for numbers only, string= for strings...
 
 ; These are all false
 (eq "abc" "abc")
@@ -31,3 +31,4 @@
 (= 1 1)
 (= 1 1.0)
 (= 1/2 0.5)
+(string= "foo" "foo")
