@@ -45,3 +45,18 @@
 ;> (0 1 2 3)
 (pop foo)
 ;> 0
+
+; List processing functions are usually functional:
+; They don't modify the original list
+(defparameter foo (list 1 2 3 4))
+(defparameter bar (cdr foo))
+(setf foo (reverse foo))
+bar
+;> (2 3 4)
+; But non-consing variants exist, which means they don't allocate new cons cells
+; i.e. they are destructive & use existing ones. eg:
+(defparameter foo (list 1 2 3 4))
+(defparameter bar (cdr foo))
+(setf foo (nreverse foo))
+bar
+;> (2 1)
