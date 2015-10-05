@@ -15,4 +15,10 @@
 ;> 2
 (getf *bar* :gourd)
 ;> "How much do you want for it?"
-
+(setf (getf *bar* :gourd) "What's wrong with it?")
+(getf *bar* :gourd)
+;> "What's wrong with it?"
+(remf *bar* :gourd)
+(getf *bar* :gourd)
+;> NIL
+; Also worth noting: All symbols have an associated plist, accessed via symbol-plist or get
