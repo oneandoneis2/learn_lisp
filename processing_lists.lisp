@@ -21,10 +21,18 @@
 ;> (2 3 4 5)
 (map 'string (lambda (x) (char-upcase x)) "a B c")
 ;> "A B C"
-
 ; mapcar is just for lists - nice & simple
 (mapcar (lambda (x) (* 2 x)) '(1 2 3 4))
 ;>(2 4 6 8)
+; maplist passes the actual cons cells, not the values
+(mapcar (lambda (x) (format t "~a~%" x)) '(1 2))
+;> 1
+;> 2
+(maplist (lambda (x) (format t "~a~%" x)) '(1 2))
+;> (1 2)
+;> (2)
+; mapcan/mapcon
+
 
 
 ;filter
