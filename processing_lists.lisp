@@ -108,4 +108,9 @@ bar
   '(:z 1 :y 2 :x 3)
   (format t "~a ~a ~a" x y z))
 ;> 3 2 1
+(destructuring-bind
+  (&whole all x y z)    ; Keep original list whilst also breaking into params..
+  '(1 2 3)
+  (format t "~a ~a ~a ~a" x y z all))
+;> 1 2 3 (1 2 3)
 ; And so on and so forth - just like with functions!
