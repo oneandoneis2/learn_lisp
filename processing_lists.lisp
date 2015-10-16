@@ -68,3 +68,44 @@ bar
 (setf foo (nreverse foo))
 bar
 ;> (2 1)
+
+; And then there's destructuring bind
+; This is a macro that lets you split up a list like a function/macro's params
+; Three parts: The param list, the arguments list, and the body
+; Kinda an annoying way of doing pattern matching
+(destructuring-bind
+  (x y)     ; param list - just like a function's
+  '(1 2)    ; Arguments list - just like when calling a function
+  (format t "~a ~a" x y))   ; Body: What to do with the args you bound to params
+;> 1 2
+(destructuring-bind
+  (x (y1 y2) z)
+  '(1 (2 3) 4)
+  (format t "~a ~a ~a ~a" x y1 y2 z))
+;> 1 2 3 4
+(destructuring-bind
+  (x (y1 &optional y2) z)   ; Can have optional params
+  '(1 (2 3) 4)
+  (format t "~a ~a ~a ~a" x y1 y2 z))
+;> 1 2 3 4
+(destructuring-bind
+  (x (y1 &optional y2) z)
+  '(1 (2) 4)
+  (format t "~a ~a ~a ~a" x y1 y2 z))
+; 1 2 NIL 4
+(destructuring-bind
+  (x (y1 &optional (y2 'erk)) z)    ; Can specify defaults
+  '(1 (2) 4)
+  (format t "~a ~a ~a ~a" x y1 y2 z))
+;> 1 2 ERK 4
+(destructuring-bind
+  (x &rest y)    ; Bung everything else into a list
+  '(1 2 3 4)
+  (format t "~a ~a" x y))
+;> 1 (2 3 4)
+(destructuring-bind
+  (&key x y z)    ; Order by keyword
+  '(:z 1 :y 2 :x 3)
+  (format t "~a ~a ~a" x y z))
+;> 3 2 1
+; And so on and so forth - just like with functions!
