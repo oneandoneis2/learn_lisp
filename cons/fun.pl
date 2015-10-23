@@ -3,6 +3,9 @@ use strict;
 use warnings;
 use feature 'say';
 
+# Using closure instead of hash for cons cells
+# Totally transparent change as far as interface/functionality is concerned
+# Blurring the lines between data & code! Woo!
 sub cons {
     my ($fst, $snd) = @_;
     return sub { my $f = shift; $f ? $f->($fst,$snd) : 'cons' }
