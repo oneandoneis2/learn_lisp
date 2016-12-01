@@ -1,3 +1,4 @@
+;
 ; Numbers (ints, floats)
 ; Strings
 ; Symbols
@@ -55,6 +56,7 @@
 ;> "Jello" in both cases
 
 ; Vectors, like lists, are subtypes of sequences. They are integer-indexed
+; General (hold anything) or specific (e.g. a string is a char vector)
 ; Fixed-sized vectors are like C arrays
 ; Resizeable vectors are like Perl arrays
 ; Make fsv's with vector:

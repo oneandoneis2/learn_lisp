@@ -1,4 +1,4 @@
-; An association list, or alist
+; An association list, or alist (A list of lists, with cars as keys)
 (defparameter *foo* '((inquisition . "Nobody expects the spanish inquisition!")
                       (lumberjack . "I'm a lumberjack and I'm okay")
                       (brian . "The babe they call Brian")))
@@ -7,7 +7,7 @@
 (cdr (assoc 'lumberjack *foo*))
 ;> "I'm a lumberjack and I'm okay"
 
-; A property list, or plist
+; A property list, or plist - a list of key-value pairs
 (defparameter *bar* '(parrot "It's dead, that's what's wrong with it!"
                       :gourd "How much do you want for it?"
                       three "Three shall be the number thou shalt count"))

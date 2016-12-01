@@ -116,3 +116,62 @@
 ;> Le chien 'Arrie says Woah! And then has lunch.
 ; Having the "rabies" be inserted by a "before" for any chiens would probably
 ; be the nicer way to do it, rather than munging two primaries.
+
+; OO notes following a read of Keene
+(defclass aquatic ()
+  ()
+  (:documentation "The things I keep in my aquarium"))
+
+(defclass animate (aquatic)
+  ((moves
+     :initarg :moves
+     :accessor moves))
+  (:documentation "The moving things in the aquarium"))
+
+(defclass inanimate (aquatic)
+  ()
+  (:documentation "The stationary things in the aquarium"))
+
+(defclass living (aquatic)
+  ((breathes
+     :initarg :breathes
+     :accessor breathes
+     :documentation "The dissolved gas the organism requires"))
+  (:documentation "For the living things in my aquarium"))
+
+(defclass nonliving (aquatic) () (:documentation "For the non-living things in my aquarium"))
+
+(defclass aquatic_animal (living animate)
+  ((breathes :initform 'oxygen)
+   (eats :initarg :food
+     :accessor eats)))
+
+(defclass aquatic_plant (living inanimate)
+  ((breathes :initform 'co2)))
+
+(defclass pebble (nonliving inanimate)
+  ((shinyness :initarg :shiny :reader shiny)))
+
+(defclass fish (aquatic_animal) ((moves :initform 'swimming) (eats :initform 'flakes)))
+
+(defclass shrimp (aquatic_animal) ((moves :initform 'walking) (eats :initform 'flakes)))
+
+(defclass snail (aquatic_animal) ((moves :initform 'slide) (eats :initform 'algae)))
+
+(defclass guppy (fish) ())
+
+(defgeneric is_shiny? (aquatic) (:documentation "Is the aquatic thing shiny?"))
+(defmethod is_shiny? ((thing guppy)) 'yes)
+(defmethod is_shiny? ((thing pebble)) (shiny thing))
+(defmethod is_shiny? (thing) 'no)
+
+(defgeneric is_living? (aquatic) (:documentation "Is the aquatic thing alive?"))
+(defmethod is_living? ((thing living)) 'yes)
+(defmethod is_living? ((thing nonliving)) 'no)
+
+(defparameter endler (make-instance 'guppy))
+(defparameter black (make-instance 'snail))
+(defparameter flint (make-instance 'pebble :shiny 'no))
+(defparameter quartz (make-instance 'pebble :shiny 'yes))
+
+(with-accessors ((food eats)(gas breathes)) endler `(endler eats ,food and breathes ,gas))

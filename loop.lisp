@@ -32,3 +32,9 @@
   (push i nums))
 ; or alternatively
 (loop for i from 1 to 10 collecting i)
+; A nice-ish way of computing Fibonacci
+(loop for i below 10
+      and a = 0 then b
+      and b = 1 then (+ a b)
+      collecting a)
+;> (0 1 1 2 3 5 8 13 21 34)
