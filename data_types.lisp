@@ -1,11 +1,12 @@
-;
 ; Numbers (ints, floats)
-; Strings
+; Characters
 ; Symbols
 ; Keywords
-; Characters & strings
-; Lists, vectors, arrays
-; Hash tables
+; Collections   - hash tables
+;               - sequences
+;                   - lists
+;                   - vectors
+;                       - strings
 
 ; Starting simply, integers:
 1
