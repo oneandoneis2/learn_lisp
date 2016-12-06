@@ -1,0 +1,7 @@
+#!/usr/bin/clisp
+
+(mapcar (lambda (filename)
+          (unless (probe-file filename)
+            (open filename :direction :output)))
+        *args*)
+
