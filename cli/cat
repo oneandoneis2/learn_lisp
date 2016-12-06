@@ -1,0 +1,7 @@
+#!/usr/bin/clisp
+
+(mapcar (lambda (filename)
+          (with-open-file (file filename) (loop for line = (read-line file nil)
+                                             while line
+                                             do (format t "~a~%" line))))
+        *args*)
