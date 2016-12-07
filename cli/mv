@@ -1,0 +1,7 @@
+#!/usr/bin/clisp
+
+(unless (eq 2 (length *args*)) (error "Wrong number of args"))
+
+(let ((from (car *args*))
+      (to (cadr *args*)))
+  (rename-file from to))
