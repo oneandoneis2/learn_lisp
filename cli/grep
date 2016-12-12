@@ -1,0 +1,36 @@
+#!/usr/bin/clisp
+(load "~/quicklisp/setup.lisp")
+; Silently load regex package
+(let* ((*standard-output* (make-broadcast-stream))
+       (*error-output* *standard-output*))
+  (ql:quickload :cl-ppcre))
+
+(if (eq 0 (length *args*)) (error "Must supply at least a regular expression"))
+
+(defvar *regex* (car *args*))
+
+; Some pretty-print options
+(defun print-colour (col str) (format nil "~c[~am~a~c[0m" #\ESC col str #\ESC))
+(defun print-purple (str) (print-colour 35 str))
+(defun print-green (str) (print-colour 32 str))
+(defun print-red (str) (print-colour 31 str))
+(defun print-prefix (str) (format nil "~a~a" (print-purple str) (print-green ":")))
+(defun pretty-match (str) (cl-ppcre::regex-replace *regex* str (print-red "\\&")))
+
+; The greppy functions
+(defun filegrep (filename)
+  (with-open-file (file filename)
+    (grep (print-prefix filename) file)))
+(defun streamgrep ()
+  (grep "" *standard-input*))
+(defun grep (prefix str)
+  (loop for line = (read-line str nil)
+        while line
+        if (cl-ppcre::scan *regex* line)
+        do (format t "~a~a~%" prefix (pretty-match line))))
+
+; And now to do the actual grep part.
+; Are we dealing with files or stdin?
+(if (> (length *args*) 1)
+  (mapcar #'filegrep (cdr *args*))
+  (streamgrep))
