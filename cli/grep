@@ -15,7 +15,7 @@
 (defun print-green (str) (print-colour 32 str))
 (defun print-red (str) (print-colour 31 str))
 (defun print-prefix (str) (format nil "~a~a" (print-purple str) (print-green ":")))
-(defun pretty-match (str) (cl-ppcre::regex-replace *regex* str (print-red "\\&")))
+(defun pretty-match (str) (cl-ppcre::regex-replace-all *regex* str (print-red "\\&")))
 
 ; The greppy functions
 (defun filegrep (filename)
