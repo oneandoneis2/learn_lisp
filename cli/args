@@ -1,0 +1,8 @@
+#!/usr/bin/clisp
+
+(defun apply-to-input (fn args)
+  ; If args is an empty list, we want to read from STDIN
+  (unless args (setf args (list *standard-input*)))
+  ; Now just iterate over the list of args
+  (mapcar fn args))
+(apply-to-input #'show *args*)

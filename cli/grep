@@ -31,6 +31,9 @@
 
 ; And now to do the actual grep part.
 ; Are we dealing with files or stdin?
-(if (> (length *args*) 1)
-  (mapcar #'filegrep (cdr *args*))
-  (streamgrep))
+(defun dogrep ()
+  (if (> (length *args*) 1)
+    (mapcar #'filegrep (cdr *args*))
+    (streamgrep)))
+
+(dogrep)

@@ -114,3 +114,12 @@ bar
   (format t "~a ~a ~a ~a" x y z all))
 ;> 1 2 3 (1 2 3)
 ; And so on and so forth - just like with functions!
+
+; Other listy things
+(nth 2 '(1 2 3 4))
+;> 3
+
+(list* 1 2)
+;> (1 . 2)
+(list* 1 2 3)
+;> (1 2 . 3)
