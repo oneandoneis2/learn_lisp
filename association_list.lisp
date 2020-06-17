@@ -22,3 +22,9 @@
 (getf *bar* :gourd)
 ;> NIL
 ; Also worth noting: All symbols have an associated plist, accessed via symbol-plist or get
+
+; Property lists (plists) are lists of key-value pairs, accessed via keyword to getf
+(getf (list :a 1 :b 2 :c 3) :a)
+;> 1
+(getf (list :a 1 :b 2 :c 3) :b)
+;> 2)
