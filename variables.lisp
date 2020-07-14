@@ -80,3 +80,12 @@
     (do-stuff))
 ; Everything done by do-stuff will output to some other stream;
 ; stdout will then revert to normal outside the scope of the let
+
+; setf works on more than just simple variables - like arrays and hashes - in a seemingly-weird way
+; that's actually the same as other languages when you think about it
+(let ((h (make-hash-table)))
+  (setf (gethash 'foo h) "Wibble")
+  (format nil "Foo contains ~a" (gethash 'foo h)))
+;> "Foo contains Wibble"
+; Although "Use the get function to set it" seems weird, it's basically exactly the same as `$hash{'foo'} = 'bar'
+; The same expression that gets the value is used to set it - setf can turn gethash etc. into an L-value`

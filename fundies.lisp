@@ -129,3 +129,19 @@
 ; and we need to handle postfix options, and and and..." - a macro can make sweeping assumptions about
 ; the structure of the list it takes as input and the list it will output, simplifying the cases it
 ; must handle.
+
+; Lisp types, like much of FP, should be thought of not via implementation details, but instead by
+; how you interact with them.
+
+; e.g. a C array is a contiguous area of memory accessed via offset:
+;   foo[0] is the start because no offset needed to find it, etc. All makes sense
+
+; A LISP list is made up of cons cells, which are created via (cons) and accessed via (car) and (cdr)
+; They could as easily be made of functions via closure or by being a pair of pointers.
+; You shouldn't know, or need to know, which (if either) they actually are.
+
+; A LISP form can be:
+; # a function
+; # a macro
+; # a special operator
+
