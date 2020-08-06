@@ -56,6 +56,43 @@
 
 ; Note similarity of structure between list and AST
 
+; Another example: In python,
+; x = ast.parse('''
+;               a = 1
+;               b = 2
+;               print(a + b)
+;               ''')
+;
+; >>> print(ast.dump(x))
+;
+;Module(
+; body=[
+;       Assign(
+;              targets=[
+;                       Name(id='a', ctx=Store())],
+;              value=Num(n=1)),
+;       Assign(
+;              targets=[
+;                       Name(id='b', ctx=Store())],
+;              value=Num(n=2)),
+;       Expr(
+;            value=Call(
+;                       func=Name(id='print', ctx=Load()),
+;                       args=[
+;                             BinOp(
+;                                   left=Name(id='a', ctx=Load()),
+;                                   op=Add(),
+;                                   right=Name(
+;                                              id='b',
+;                                              ctx=Load()))],
+;                       keywords=[]))])
+
+; Whereas in Lisp, the equivalent:
+; (let ((a 1)
+;       (b 2))
+;   (print (+ a b)))
+; the statement *is* the AST.
+
 ; The compiler/interpreter is broken into two parts:
 ;   the reader - takes a string of input and parses it into an Sexpr
 ;   the evaluator - takes a list as input and evaluates it as a form
@@ -107,19 +144,29 @@
 ; that will always behave in the desired fashion
 ; e.g. conditionals in other languages: if-else
 ; If you had an "if" function, it would be called like
-;   if($test, $if_true, $if_false)
+;   if($test, $then, $else)
 ; But as a statement, it's
-;   if ($test) { # handle truth} else { # handle false }
+;   if ($test) { # then-code } else { # else-code }
 ; And because it's a statement not an expression, you can't do "$foo = if ..."
 
 ; There's no uniformity: parens *and* curly brackets; requirement for an "else" keyword;
 ; the "if" is prefix but the test is likely to be infix: `if ($foo == $bar)`
 ; and often the if can be post-fix too: `$foo = $bar if $bar`
+; You can have `if ($bar) { $foo = 1} { $foo = 0 }` or `$foo = $bar ? 1 : 0;` or `$foo = 0; $foo = 1 if $bar`
 
-; Lisp is always prefix: (<verb> <args>) for *everything*
+; Retrieval from data structures/functions:
+; $foo = funcname(args)
+; $foo = arrayname[num]
+; $foo = hashname{key}
+
+; Lisp is always prefix: (<verb> [<args>]) for *everything*
+; Functions? (funcname  [args])
+; Operators? (operator  [args])
+; Macros?    (macroname [args])
+; etc etc
 ; There are no statements, everything is an expression.
 ;   (if test handle_truth handle_false)
-; And because it's a statement, where other would have to do
+; And because it's a statement, where others would have to do
 ;   if ($test) { print "True" } else { print "false" }
 ; Lisp can instead do
 ;   (print (if test "True" "False"))
