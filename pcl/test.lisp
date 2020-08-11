@@ -1,10 +1,17 @@
+(defvar *test-name* nil)
+
 (defmacro wgs ((&rest names) &body body)
   `(let ,(loop for n in names collect `(,n (gensym)))
      ,@body))
 
 (defun report-result (result form)
-  (format t "~:[FAIL~;pass~] ... ~a~%" result form)
+  (format t "~:[FAIL~;pass~] ... ~a: ~a~%" result *test-name* form)
   result)
+
+(defmacro deftest (name parameters &body body)
+  `(defun ,name ,parameters
+     (let ((*test-name* ',name))
+       ,@body)))
 
 (defmacro combine-results (&body forms)
   (wgs (result)
@@ -16,13 +23,13 @@
   `(combine-results
      ,@(loop for form in forms collect `(report-result ,form ',form))))
 
-(defun test-+ ()
+(deftest test-+ ()
   (check
     (= (+ 1 2) 3)
     (= (+ 1 2 3) 6)
     (= (+ -1 -3) -5)))
 
-(defun test-* ()
+(deftest test-* ()
   (check
     (= (* 2 2) 4)
     (= (* 3 5) 15)))
