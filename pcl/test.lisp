@@ -22,4 +22,14 @@
     (= (+ 1 2 3) 6)
     (= (+ -1 -3) -5)))
 
-(princ (test-+))
+(defun test-* ()
+  (check
+    (= (* 2 2) 4)
+    (= (* 3 5) 15)))
+
+(defun test-arithmetic ()
+  (combine-results
+    (test-+)
+    (test-*)))
+
+(princ (test-arithmetic))
